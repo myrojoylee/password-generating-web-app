@@ -1,20 +1,22 @@
 // Assignment code here
-// Assignment code here
+// ================ DECLARING GLOBAL VARIABLES =============
+
 var countClicks = 1;
 var userLength;
 
+// variables for form and fieldset objects and properties
 var askLength = document.getElementById("askLength");
 var askCharacterTypes = document.getElementById("askCharacterTypes");
-
 var inputLength = document.querySelector(".length");
 var checkLowercase = document.getElementById("lowercase");
 var checkUppercase = document.getElementById("uppercase");
 var checkNumeral = document.getElementById("numeral");
 var checkSpecialCharacters = document.getElementById("specialCharacters");
 
+// this variable accesses the checked property for each character type
 var inputCheck = document.querySelectorAll('input[type="checkbox"]');
 
-var uppercaseText = "no";
+// var uppercaseText = "no";
 var passwordText = document.querySelector("#password");
 
 var closeModal = document.querySelector(".next");
@@ -22,18 +24,34 @@ var nextBtn = document.querySelector(".next");
 var startOver = document.querySelector(".start-over");
 var restart = document.querySelector(".restart");
 
+// declaring variables of arrays with character types
 var alphabetString = "abcdefghijklmnopqrstuvwxyz";
 var numerals = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var specialCharactersList = `!"#$%&'()*+,-./:;<=>?@[\]^_{|}~` + "`";
+
+// declaring variables with random indexes
 var randomIndexAlphabet, randomIndexSpecialCharacters, randomIndexNumeral;
+
+//randomizes letter case
+var lowercaseOrUppercase;
+
+// ================ Declaring empty arrays =============
+var allPossibleCharacterOptions = [];
+
+// fieldset: once any or all boxes are checked, boolean values populate this array
 var checkArray = [];
+
+// fieldset: boolean values are assigned a 'yes' or 'no'
 var checkArrayText = [];
 
+// array where we push everything before shuffle
 var passwordBefore = [];
 
+// to access modal for event listeners
 var myModalEl = document.getElementById("exampleModal");
 
-// We first do some styling changes in DOM.
+// We first do some styling changes in DOM
+// to simulate the text area is 'loading'.
 function generatePassword() {
   document.getElementById("password").placeholder = "Loading...";
   closeModal.innerHTML = "Step 2 >>";
@@ -66,13 +84,12 @@ function askForLength() {
 // move forward.
 function askForCharacterTypes() {
   closeModal.innerHTML = "Step 3 >>";
-  countClicks++;
-  console.log(countClicks);
+  // countClicks++;
+  // console.log(countClicks);
   askLength.style.display = "none";
   askLength.style.color = "black";
   inputLength.style.display = "none";
   askCharacterTypes.style.display = "block";
-
   nextBtn.addEventListener("click", checkForClicks);
 }
 
@@ -147,6 +164,39 @@ function confirmationOrRestart() {
   });
 
   nextBtn.addEventListener("click", randomPasswordGeneration);
+}
+
+function resetProcess() {
+  // startOver.dataset.bsDismiss = "modal";
+
+  // closeModal.dataset.bsDismiss = "modal";
+  window.location.reload();
+}
+
+function randomPasswordGeneration() {
+  passwordText.value = `I didn't program this part yet!!!!`;
+  restart.style.display = "flex";
+  // restart.style.flex = console.log(userLength);
+
+  // calculate random values to indexes for each array.
+  randomIndexAlphabet = Math.floor(Math.random() * alphabetString.length);
+  randomIndexSpecialCharacters = Math.floor(
+    Math.random() * specialCharactersList.length
+  );
+  randomIndexNumeral = Math.floor(Math.random() * numerals.length);
+  console.log(
+    randomIndexAlphabet,
+    randomIndexSpecialCharacters,
+    randomIndexNumeral
+  );
+
+  passwordBefore.push(
+    alphabetString[randomIndexAlphabet],
+    specialCharactersList[randomIndexSpecialCharacters],
+    numerals[randomIndexNumeral]
+  );
+
+  for (var i = 0; i < Number(userLength); i++) {}
 }
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
