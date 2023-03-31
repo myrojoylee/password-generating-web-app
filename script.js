@@ -61,6 +61,47 @@ function askForLength() {
   }
 }
 
+// prompts user to choose as many character types they want in
+// the password. If they do not check anything, they cannot
+// move forward.
+function askForCharacterTypes() {
+  closeModal.innerHTML = "Step 3 >>";
+  countClicks++;
+  console.log(countClicks);
+  askLength.style.display = "none";
+  askLength.style.color = "black";
+  inputLength.style.display = "none";
+  askCharacterTypes.style.display = "block";
+
+  nextBtn.addEventListener("click", checkForClicks);
+}
+
+function checkForClicks() {
+  closeModal.innerHTML = "Get password";
+  if (
+    checkLowercase.checked ||
+    checkUppercase.checked ||
+    checkNumeral.checked ||
+    checkSpecialCharacters.checked
+  ) {
+    for (var i = 0; i < inputCheck.length; i++) {
+      checkArray.push(inputCheck[i].checked);
+      // now we have the boolean values and text with checkboxes
+      if (checkArray[i] == true) {
+        checkArrayText.push("yes");
+      } else {
+        checkArrayText.push("no");
+      }
+    }
+    startOver.style.display = "block";
+    confirmationOrRestart();
+  } else {
+    askLength.innerHTML = "At least one box must be checked.";
+    askLength.style.color = "red";
+    askLength.style.display = "block";
+    console.log("at least one box must be checked");
+  }
+}
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
