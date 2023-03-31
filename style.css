@@ -50,17 +50,27 @@ header {
   height: 2px;
 }
 
+.card-header-text {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.25em;
+}
+
 .card-body {
   min-height: 100px;
 }
 
 .card-footer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
 .card-footer::before {
   content: " ";
-  display: block;
+  display: flex;
   width: 100%;
   background: #e7e9eb;
   height: 2px;
@@ -68,7 +78,7 @@ header {
 
 .card-footer::after {
   content: " ";
-  display: block;
+  display: flex;
   clear: both;
 }
 
@@ -83,6 +93,7 @@ header {
   font-size: 22px;
   line-height: 22px;
   margin: 16px 16px 16px 20px;
+  width: fit-content;
   padding: 14px 34px;
   text-align: center;
   cursor: pointer;
@@ -91,6 +102,11 @@ header {
 button[disabled] {
   cursor: default;
   background: #c0c7cf;
+}
+
+.restart:hover {
+  background: #235ed7;
+  color: white;
 }
 
 .float-right {

@@ -1,8 +1,7 @@
 // Assignment code here
 // ================ DECLARING GLOBAL VARIABLES =============
+// =========================================================
 
-var countClicks = 1;
-var userLength;
 // to access modal for event listeners
 var myModalEl = document.getElementById("exampleModal");
 
@@ -11,9 +10,10 @@ var myModalEl = document.getElementById("exampleModal");
 var generateBtn = document.querySelector("#generate");
 // Add event listener to generate button
 generateBtn.addEventListener("click", generatePassword);
-// ==========================================================
 
-// =================FORM AND FIELDSET VARIABLES==============
+// ================ FORM AND FIELDSET VARIABLES =============
+// ==========================================================
+var userLength;
 var askLength = document.getElementById("askLength");
 var askCharacterTypes = document.getElementById("askCharacterTypes");
 var inputLength = document.querySelector(".length");
@@ -30,8 +30,10 @@ var closeModal = document.querySelector(".next");
 var nextBtn = document.querySelector(".next");
 var startOver = document.querySelector(".start-over");
 var restart = document.querySelector(".restart");
+var cardHeader = document.querySelector(".card-header-text");
 
-// ===========================ARRAYS==========================
+// ========================== ARRAYS =========================
+// ===========================================================
 // declaring variables of arrays with character types
 var lowercaseAlphabet = "abcdefghijklmnopqrstuvwxyz";
 var uppercaseAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -57,22 +59,18 @@ var checkArrayText = [];
 // array where we push everything before shuffle
 var finalPassword = [];
 
-var allIndexes = [];
-
-// ==========================================================
-/////////////////////////////////////////////////////////////
+// =================================================================
+//         -------------------CODE BELOW------------------
+// =================================================================
 
 function generatePassword() {
-  // document.getElementById("password").placeholder = "Loading...";
+  document.getElementById("password").placeholder = "Loading...";
   closeModal.innerHTML = "Step 2 >>";
   nextBtn.addEventListener("click", askForLength);
-
-  return finalPassword;
 }
 
 // Prompt user for length with user validation
 function askForLength() {
-  countClicks++;
   userLength = document.getElementById("length").value;
   if (
     userLength >= 8 &&
@@ -163,7 +161,6 @@ function confirmationOrRestart() {
     `Otherwise, click 'Get password'.`;
 
   askLength.innerHTML = confirmationMessage;
-  // passwordText.value = `I didn't program this part yet!!!!`;
   startOver.addEventListener("click", (event) => {
     window.location.reload();
   });
@@ -171,7 +168,7 @@ function confirmationOrRestart() {
 }
 
 function resetProcess() {
-  // startOver.dataset.bsDismiss = "modal";
+  startOver.dataset.bsDismiss = "modal";
 
   // closeModal.dataset.bsDismiss = "modal";
   window.location.reload();
@@ -185,17 +182,18 @@ function generateRequiredCharacterPool() {
     }
   }
   requiredCharacterPool = requiredCharacterPool.join("");
-  // console.log(checkArray, requiredCharacterPool);
 }
 
 // let's generate the password
 function randomPasswordGeneration() {
   // passwordText.value = `I didn't program this part yet!!!!`;
   restart.style.display = "flex";
-
+  restart.addEventListener("click", (event) => {
+    window.location.reload();
+  });
   //
   generateRequiredCharacterPool();
-  //   randomIndexAllCharacters = Math.floor(Math.random() * allCharacters.length);
+
   for (var i = 0; i < Number(userLength); i++) {
     var y = Math.floor(Math.random() * requiredCharacterPool.length);
     finalPassword.push(requiredCharacterPool[y]);
@@ -207,6 +205,9 @@ function randomPasswordGeneration() {
 
 // Write password to the #password input
 function writePassword() {
+  cardHeader.innerHTML = `Your password is below. Click 'Start Over' to begin again.`;
+  cardHeader.style.textAlign = "center";
   passwordText.value = finalPassword;
+  generateBtn.removeEventListener("click", generatePassword);
   return finalPassword;
 }
