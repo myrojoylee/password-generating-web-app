@@ -118,8 +118,31 @@ button[disabled] {
   overflow: hidden;
 }
 
+/* ~~~~~~~~~~~~~~~~~ FORM STYLES ~~~~~~~~~~~~~~~ */
+form {
+  border: none;
+}
+
+/* .length {
+  border: 1px solid blue;
+} */
+
+/* ~~~ keep other form questions hidden until next button is pressed */
+
+#askLowercase,
+#askUppercase,
+#askSpecialCharacters {
+  display: none;
+}
+
+fieldset,
+.start-over,
+.restart {
+  display: none;
+}
+
 @media (max-width: 690px) {
-  .btn {
+  .button {
     font-size: 1rem;
     margin: 16px 0px 0px 0px;
     padding: 10px 15px;
@@ -131,7 +154,7 @@ button[disabled] {
 }
 
 @media (max-width: 500px) {
-  .btn {
+  .button {
     font-size: 0.8rem;
   }
 }
