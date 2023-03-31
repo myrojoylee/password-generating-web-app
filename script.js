@@ -31,11 +31,35 @@ var checkArrayText = [];
 
 var passwordBefore = [];
 
+var myModalEl = document.getElementById("exampleModal");
+
+// We first do some styling changes in DOM.
 function generatePassword() {
-  userInputLength();
+  document.getElementById("password").placeholder = "Loading...";
+  closeModal.innerHTML = "Step 2 >>";
+  nextBtn.addEventListener("click", askForLength);
 }
 
-// This is to validate the length parameter.
+// Prompt user for length.
+// If user inputs an invalid action, it won't go forward.
+function askForLength() {
+  countClicks++;
+  userLength = document.getElementById("length").value;
+  if (
+    userLength >= 8 &&
+    userLength <= 128 &&
+    Number.isInteger(Number(userLength))
+  ) {
+    console.log(`The user picked a password length of ${userLength}.`);
+
+    askForCharacterTypes();
+  } else {
+    inputLength.value = "";
+    askLength.style.color = "red";
+    askLength.innerHTML =
+      "Please try again. Choose a number between 8 and 128:";
+  }
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
