@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -14,7 +20,7 @@
       </header>
       <div class="card">
         <div class="card-header">
-          <h2>Generate a Password</h2>
+          <h2>Click 'Generate Password' below and follow the prompts.</h2>
         </div>
         <div class="card-body">
           <textarea
@@ -25,10 +31,109 @@
           ></textarea>
         </div>
         <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+          <!-- <button id="generate" class="btn">Generate Password</button> -->
+          <!-- Button trigger modal -->
+          <button
+            id="generate"
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Generate Password
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary restart"
+            data-bs-dismiss="modal"
+          >
+            Start Over
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="askLength">
+                    Choose a number between 8 and 128 for password length:
+                  </h1>
+
+                  <!-- The X that closes the modal -->
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form action="" class="length">
+                    <input id="length" type="text" />
+                  </form>
+                  <fieldset id="askCharacterTypes">
+                    <legend>Choose your password's features:</legend>
+
+                    <div>
+                      <input type="checkbox" id="lowercase" name="lowercase" />
+                      <label for="lowercase">lowercase</label>
+                    </div>
+
+                    <div>
+                      <input type="checkbox" id="uppercase" name="uppercase" />
+                      <label for="uppercase">uppercase</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" id="numeral" name="numeral" />
+                      <label for="numeral">number</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="specialCharacters"
+                        name="specialCharacters"
+                      />
+                      <label for="specialCharacters">special characters</label>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button> -->
+
+                  <button
+                    type="button"
+                    class="btn btn-primary start-over"
+                    data-bs-dismiss="modal"
+                  >
+                    Start Over
+                  </button>
+                  <button type="button" class="btn btn-primary next">
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>
