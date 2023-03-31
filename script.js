@@ -76,6 +76,7 @@ function askForCharacterTypes() {
   nextBtn.addEventListener("click", checkForClicks);
 }
 
+// Checks whether at least box is checked.
 function checkForClicks() {
   closeModal.innerHTML = "Get password";
   if (
@@ -101,6 +102,51 @@ function checkForClicks() {
     askLength.style.display = "block";
     console.log("at least one box must be checked");
   }
+}
+// Confirms all info for the user
+// User can choose to start over if information is incorrect.
+function confirmationOrRestart() {
+  closeModal.innerHTML = "Get password";
+  closeModal.dataset.bsDismiss = "modal";
+
+  myModalEl.removeEventListener("hidden.bs.modal", (event) => {
+    window.location.reload();
+  });
+  askLength.style.display = "block";
+  askCharacterTypes.style.display = "none";
+
+  confirmationMessage =
+    `Please confirm your password criteria: ` +
+    "<br>" +
+    "<br>" +
+    "Length of password: " +
+    userLength +
+    "<br>" +
+    "Lowercase letters? " +
+    checkArrayText[0] +
+    "<br>" +
+    "Uppercase letters? " +
+    checkArrayText[1] +
+    "<br>" +
+    "Numbers? " +
+    checkArrayText[2] +
+    "<br>" +
+    "Special characters? " +
+    checkArrayText[3] +
+    "<br>" +
+    "<br>" +
+    `If this is not correct, please click 'Start Over'.` +
+    "<br>" +
+    "<br>" +
+    `Otherwise, click 'Get password'.`;
+
+  askLength.innerHTML = confirmationMessage;
+  passwordText.value = `I didn't program this part yet!!!!`;
+  startOver.addEventListener("click", (event) => {
+    window.location.reload();
+  });
+
+  nextBtn.addEventListener("click", randomPasswordGeneration);
 }
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
