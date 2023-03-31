@@ -3,8 +3,17 @@
 
 var countClicks = 1;
 var userLength;
+// to access modal for event listeners
+var myModalEl = document.getElementById("exampleModal");
 
-// variables for form and fieldset objects and properties
+// ==========GIVING CLICK FUNCTIONALITY TO RED BUTTON========
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
+// Add event listener to generate button
+generateBtn.addEventListener("click", generatePassword);
+// ==========================================================
+
+// =================FORM AND FIELDSET VARIABLES==============
 var askLength = document.getElementById("askLength");
 var askCharacterTypes = document.getElementById("askCharacterTypes");
 var inputLength = document.querySelector(".length");
@@ -15,28 +24,29 @@ var checkSpecialCharacters = document.getElementById("specialCharacters");
 
 // this variable accesses the checked property for each character type
 var inputCheck = document.querySelectorAll('input[type="checkbox"]');
-
-// var uppercaseText = "no";
+// ==========================================================
 var passwordText = document.querySelector("#password");
-
 var closeModal = document.querySelector(".next");
 var nextBtn = document.querySelector(".next");
 var startOver = document.querySelector(".start-over");
 var restart = document.querySelector(".restart");
 
+// ===========================ARRAYS==========================
 // declaring variables of arrays with character types
-var alphabetString = "abcdefghijklmnopqrstuvwxyz";
-var numerals = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var specialCharactersList = `!"#$%&'()*+,-./:;<=>?@[\]^_{|}~` + "`";
+var lowercaseAlphabet = "abcdefghijklmnopqrstuvwxyz";
+var uppercaseAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var numerals = "0123456789";
+var specialCharacters = `!"#$%&'()*+,-./:;<=>?@[\]^_{|}~` + "`";
 
-// declaring variables with random indexes
-var randomIndexAlphabet, randomIndexSpecialCharacters, randomIndexNumeral;
+// variable with all arrays together
+var allCharacters = [
+  lowercaseAlphabet,
+  uppercaseAlphabet,
+  numerals,
+  specialCharacters,
+];
 
-//randomizes letter case
-var lowercaseOrUppercase;
-
-// ================ Declaring empty arrays =============
-var allPossibleCharacterOptions = [];
+var requiredCharacterPool = [];
 
 // fieldset: once any or all boxes are checked, boolean values populate this array
 var checkArray = [];
@@ -45,21 +55,22 @@ var checkArray = [];
 var checkArrayText = [];
 
 // array where we push everything before shuffle
-var passwordBefore = [];
+var finalPassword = [];
 
-// to access modal for event listeners
-var myModalEl = document.getElementById("exampleModal");
+var allIndexes = [];
 
-// We first do some styling changes in DOM
-// to simulate the text area is 'loading'.
+// ==========================================================
+/////////////////////////////////////////////////////////////
+
 function generatePassword() {
-  document.getElementById("password").placeholder = "Loading...";
+  // document.getElementById("password").placeholder = "Loading...";
   closeModal.innerHTML = "Step 2 >>";
   nextBtn.addEventListener("click", askForLength);
+
+  return finalPassword;
 }
 
-// Prompt user for length.
-// If user inputs an invalid action, it won't go forward.
+// Prompt user for length with user validation
 function askForLength() {
   countClicks++;
   userLength = document.getElementById("length").value;
@@ -68,8 +79,6 @@ function askForLength() {
     userLength <= 128 &&
     Number.isInteger(Number(userLength))
   ) {
-    console.log(`The user picked a password length of ${userLength}.`);
-
     askForCharacterTypes();
   } else {
     inputLength.value = "";
@@ -79,13 +88,9 @@ function askForLength() {
   }
 }
 
-// prompts user to choose as many character types they want in
-// the password. If they do not check anything, they cannot
-// move forward.
+// prompts user to click at least one criterion to proceed
 function askForCharacterTypes() {
   closeModal.innerHTML = "Step 3 >>";
-  // countClicks++;
-  // console.log(countClicks);
   askLength.style.display = "none";
   askLength.style.color = "black";
   inputLength.style.display = "none";
@@ -158,11 +163,10 @@ function confirmationOrRestart() {
     `Otherwise, click 'Get password'.`;
 
   askLength.innerHTML = confirmationMessage;
-  passwordText.value = `I didn't program this part yet!!!!`;
+  // passwordText.value = `I didn't program this part yet!!!!`;
   startOver.addEventListener("click", (event) => {
     window.location.reload();
   });
-
   nextBtn.addEventListener("click", randomPasswordGeneration);
 }
 
@@ -173,41 +177,36 @@ function resetProcess() {
   window.location.reload();
 }
 
-function randomPasswordGeneration() {
-  passwordText.value = `I didn't program this part yet!!!!`;
-  restart.style.display = "flex";
-  // restart.style.flex = console.log(userLength);
-
-  // calculate random values to indexes for each array.
-  randomIndexAlphabet = Math.floor(Math.random() * alphabetString.length);
-  randomIndexSpecialCharacters = Math.floor(
-    Math.random() * specialCharactersList.length
-  );
-  randomIndexNumeral = Math.floor(Math.random() * numerals.length);
-  console.log(
-    randomIndexAlphabet,
-    randomIndexSpecialCharacters,
-    randomIndexNumeral
-  );
-
-  passwordBefore.push(
-    alphabetString[randomIndexAlphabet],
-    specialCharactersList[randomIndexSpecialCharacters],
-    numerals[randomIndexNumeral]
-  );
-
-  for (var i = 0; i < Number(userLength); i++) {}
+// we need to restrict the pool to user criteria
+function generateRequiredCharacterPool() {
+  for (var i = 0; i < checkArray.length - 4; i++) {
+    if (checkArray[i]) {
+      requiredCharacterPool.push(allCharacters[i]);
+    }
+  }
+  requiredCharacterPool = requiredCharacterPool.join("");
+  // console.log(checkArray, requiredCharacterPool);
 }
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+
+// let's generate the password
+function randomPasswordGeneration() {
+  // passwordText.value = `I didn't program this part yet!!!!`;
+  restart.style.display = "flex";
+
+  //
+  generateRequiredCharacterPool();
+  //   randomIndexAllCharacters = Math.floor(Math.random() * allCharacters.length);
+  for (var i = 0; i < Number(userLength); i++) {
+    var y = Math.floor(Math.random() * requiredCharacterPool.length);
+    finalPassword.push(requiredCharacterPool[y]);
+  }
+  finalPassword = finalPassword.join("");
+
+  writePassword();
+}
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+  passwordText.value = finalPassword;
+  return finalPassword;
 }
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
