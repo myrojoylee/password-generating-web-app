@@ -2,7 +2,7 @@
 
 ## Description
 
-The purpose of the assignment was to create a functional random password generator. This was achieved by implementing various functions that prompted the user to select certain criteria for the password. They selected the length, certain character types, and were presented with a randomly generated password on the screen. In order to validate user input, conditional statements were included. Feedback would be provided to the user when input was invalid in order to complete the process. Lastly, the application was checked and debugged so that no errors would appear in the console at any point during the process.
+The purpose of the assignment was to create a functional random password generator. A bootstap modal was used to obtain user input through form text and checkbox input elements. This was achieved by implementing various functions that prompted the user to select certain criteria for the password. They selected the length, certain character types, and were presented with a randomly generated password on the screen. In order to validate user input, conditional statements were included. Feedback would be provided to the user when input was invalid in order to complete the process. The process ends when a password matching the selected criteria is written on the screen for the user. Lastly, the application was checked and debugged so that no errors would appear in the console at any point during the process.
 
 ## Usage
 
