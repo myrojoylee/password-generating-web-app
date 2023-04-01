@@ -1,4 +1,4 @@
-# <PASSWORD GENERATOR using Boostrap 5 Modal>
+# <PASSWORD GENERATOR using Bootstrap 5 Modal>
 
 ## Description
 
