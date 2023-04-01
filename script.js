@@ -123,6 +123,7 @@ function checkForClicks() {
     startOver.style.display = "block";
     confirmationOrRestart();
   } else {
+    closeModal.innerHTML = "Step 3 >>";
     askLength.innerHTML = "At least one box must be checked.";
     askLength.style.color = "red";
     askLength.style.display = "block";
