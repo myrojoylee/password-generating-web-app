@@ -6,11 +6,10 @@ The purpose of the assignment was to create a functional random password generat
 
 ## Usage
 
-================WORK IN PROGRESS=============
+Demo:
+<img src="https://github.com/myrojoylee/password-generating-web-app/blob/main/Assets/password_generator_app.gif" width = "700" />
 
-<img src="" width = "700" />
-
-[Click here for live site](https://myrojoylee.github.io/professional-portfolio-mj-lee/)
+[Click here for live demo](https://myrojoylee.github.io/password-generating-web-app/)
 
 ## License
 
