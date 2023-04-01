@@ -48,8 +48,10 @@ var allCharacters = [
   specialCharacters,
 ];
 
+// getting an index for required values
 var randomRequiredIndex;
 
+// getting at least one character from each required criterion
 var requiredCharacterPool = [];
 
 var getInitialRequiredCharacters = "";
@@ -60,7 +62,7 @@ var checkArray = [];
 // fieldset: boolean values are assigned a 'yes' or 'no'
 var checkArrayText = [];
 
-// array where we push everything before shuffle
+// array where we push everything before scrambling it
 var unscrambledPassword = [];
 
 // =================================================================
@@ -127,6 +129,7 @@ function checkForClicks() {
     console.log("at least one box must be checked");
   }
 }
+
 // Confirms all info for the user
 // User can choose to start over if information is incorrect.
 function confirmationOrRestart() {
@@ -219,6 +222,9 @@ function randomPasswordGeneration() {
   scrambledPassword();
 }
 
+// we need to scramble the string since our
+// required characters were just attached together
+// without it being randomized.
 function scrambledPassword() {
   unscrambledPassword = unscrambledPassword.split("");
 
