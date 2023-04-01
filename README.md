@@ -9,6 +9,7 @@ In this exercise I learned how to better handle event listeners and improved my 
 ## Usage
 
 Demo:
+
 <img src="https://github.com/myrojoylee/password-generating-web-app/blob/main/Assets/password_generator_app.gif" width = "700" />
 
 [Click here for live demo](https://myrojoylee.github.io/password-generating-web-app/)
