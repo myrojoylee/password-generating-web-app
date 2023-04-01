@@ -32,7 +32,7 @@ var startOver = document.querySelector(".start-over");
 var restart = document.querySelector(".restart");
 var cardHeader = document.querySelector(".card-header-text");
 
-// ========================== ARRAYS =========================
+// =================== ARRAYS AND STRINGS ====================
 // ===========================================================
 // declaring variables of arrays with character types
 var lowercaseAlphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -48,7 +48,11 @@ var allCharacters = [
   specialCharacters,
 ];
 
+var randomRequiredIndex;
+
 var requiredCharacterPool = [];
+
+var getInitialRequiredCharacters = "";
 
 // fieldset: once any or all boxes are checked, boolean values populate this array
 var checkArray = [];
@@ -57,7 +61,7 @@ var checkArray = [];
 var checkArrayText = [];
 
 // array where we push everything before shuffle
-var finalPassword = [];
+var unscrambledPassword = [];
 
 // =================================================================
 //         -------------------CODE BELOW------------------
@@ -179,6 +183,10 @@ function generateRequiredCharacterPool() {
   for (var i = 0; i < checkArray.length - 4; i++) {
     if (checkArray[i]) {
       requiredCharacterPool.push(allCharacters[i]);
+      randomRequiredIndex = Math.floor(Math.random() * allCharacters[i].length);
+      getInitialRequiredCharacters = getInitialRequiredCharacters.concat(
+        allCharacters[i][randomRequiredIndex]
+      );
     }
   }
   requiredCharacterPool = requiredCharacterPool.join("");
@@ -194,12 +202,34 @@ function randomPasswordGeneration() {
   //
   generateRequiredCharacterPool();
 
-  for (var i = 0; i < Number(userLength); i++) {
+  for (
+    var i = 0;
+    i < Number(userLength) - getInitialRequiredCharacters.length;
+    i++
+  ) {
     var y = Math.floor(Math.random() * requiredCharacterPool.length);
-    finalPassword.push(requiredCharacterPool[y]);
+    unscrambledPassword.push(requiredCharacterPool[y]);
   }
-  finalPassword = finalPassword.join("");
 
+  unscrambledPassword = unscrambledPassword.concat(
+    getInitialRequiredCharacters
+  );
+  unscrambledPassword = unscrambledPassword.join("");
+
+  scrambledPassword();
+}
+
+function scrambledPassword() {
+  unscrambledPassword = unscrambledPassword.split("");
+
+  for (var i = 0; i < unscrambledPassword.length - 1; i++) {
+    var x = Math.floor(Math.random() * unscrambledPassword.length);
+    var temp = unscrambledPassword[i];
+    unscrambledPassword[i] = unscrambledPassword[x];
+    unscrambledPassword[x] = temp;
+  }
+
+  finalPassword = unscrambledPassword.join("");
   writePassword();
 }
 
