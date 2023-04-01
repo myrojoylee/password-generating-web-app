@@ -30,6 +30,10 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
+h1 {
+  font-weight: bold;
+}
+
 .card {
   background-color: hsl(0, 0%, 100%);
   border-radius: 5px;
@@ -51,8 +55,8 @@ header {
 }
 
 .card-header-text {
-  text-align: center;
-  font-style: italic;
+  text-align: left;
+  font-weight: bold;
   font-size: 1.25em;
 }
 

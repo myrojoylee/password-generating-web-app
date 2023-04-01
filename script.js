@@ -88,7 +88,7 @@ function askForLength() {
     inputLength.value = "";
     askLength.style.color = "red";
     askLength.innerHTML =
-      "Please try again. Choose a number between 8 and 128:";
+      "Please try again. Choose a valid number between 8 and 128:";
   }
 }
 
