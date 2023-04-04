@@ -69,8 +69,8 @@ var unscrambledPassword = [];
 //         -------------------CODE BELOW------------------
 // =================================================================
 
+// Clicking the red button brings up the modal
 function generatePassword() {
-  document.getElementById("password").placeholder = "Loading...";
   closeModal.innerHTML = "Step 2 >>";
   nextBtn.addEventListener("click", askForLength);
 }
@@ -175,13 +175,6 @@ function confirmationOrRestart() {
   nextBtn.addEventListener("click", randomPasswordGeneration);
 }
 
-function resetProcess() {
-  startOver.dataset.bsDismiss = "modal";
-
-  // closeModal.dataset.bsDismiss = "modal";
-  window.location.reload();
-}
-
 // we need to restrict the pool to user criteria
 function generateRequiredCharacterPool() {
   for (var i = 0; i < checkArray.length - 4; i++) {
@@ -196,14 +189,12 @@ function generateRequiredCharacterPool() {
   requiredCharacterPool = requiredCharacterPool.join("");
 }
 
-// let's generate the password
+// generates password from criteria
 function randomPasswordGeneration() {
-  // passwordText.value = `I didn't program this part yet!!!!`;
   restart.style.display = "flex";
   restart.addEventListener("click", (event) => {
     window.location.reload();
   });
-  //
   generateRequiredCharacterPool();
 
   for (
@@ -235,7 +226,6 @@ function scrambledPassword() {
     unscrambledPassword[i] = unscrambledPassword[x];
     unscrambledPassword[x] = temp;
   }
-
   finalPassword = unscrambledPassword.join("");
   writePassword();
 }
